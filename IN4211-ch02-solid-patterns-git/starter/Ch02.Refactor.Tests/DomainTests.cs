@@ -34,14 +34,15 @@ public class DomainTests
         // Assert
     }
 
-    [Fact(Skip = "TODO: viết test Club.Create với tên rỗng hoặc dài hơn 100 ký tự")]
+    
     public void Club_Create_WithInvalidName_ThrowsArgumentException()
     {
         // Arrange
-
+            var club = Club.Create("Tech", "mô tả");
         // Act
-
+            var result = club.HasRoom(Club.MaxMembers);
         // Assert
+            Assert.False(result);
     }
 
     [Fact(Skip = "TODO: viết test Club.HasRoom ở biên 49 và 50 thành viên")]
