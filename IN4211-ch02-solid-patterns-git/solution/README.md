@@ -27,7 +27,7 @@ dotnet run --project EduHub.Ch02  # demo 5 khối output
 
 ## Vi phạm trong starter và cách sửa
 
-- SRP: `CreateClub` vừa validate, lưu, log, thông báo thì tách thành `ClubService` + logger + notifier; luật tên CLB về `Club.Create`.
+- SRP: `` vừa validate, lưu, log, thông báo thì tCreateClubách thành `ClubService` + logger + notifier; luật tên CLB về `Club.Create`.
 - OCP: if/else Gmail/Yahoo, Slack cố định thì dùng `INotificationService` + Factory; `PrintClubReport` thì dùng `IReportStrategy`.
 - DIP: `File.AppendAllText`, `Console.WriteLine` trong logic thì dùng `IAppLogger`, `INotificationService`.
 - ISP/DIP: list `_clubs`, `_members` giữ ngay trong class thì dùng repository interface nhỏ.

@@ -1,4 +1,7 @@
-using EduHub.Ch02;
+using EduHub.Ch02.Logging;
+using EduHub.Ch02.Notifications;
+using EduHub.Ch02.Repositories;
+using EduHub.Ch02.Services;
 
 // ═══════════════════════════════════════════════════════════════
 //  EduHub Ch02 — Refactoring với SOLID và Design Patterns
@@ -6,15 +9,15 @@ using EduHub.Ch02;
 // ═══════════════════════════════════════════════════════════════
 
 // Demo code cũ (vi phạm SOLID) — chạy được nhưng thiết kế rất xấu:
-var manager = new ClubManager();
-manager.CreateClub("Tech Club", "Câu lạc bộ công nghệ", "president@gmail.com");
-manager.AddMemberToClub(manager.GetAllClubs()[0].Id, "Nguyễn Văn A", "a@student.dthu.edu.vn");
-manager.CreateEvent(manager.GetAllClubs()[0].Id, "Workshop SOLID", new DateTime(2026, 11, 20));
-manager.PrintClubReport();
+IAppLogger logger = new FileLogger();
+var clubRepo = new InMemoryClubRepository();
+var memberRepo = new InMemoryMemberRepository();
 
-Console.WriteLine("\n--- TODO: refactor code trên (xem checklist trong de-bai.html) ---");
-Console.WriteLine("1. Phân tích vi phạm SOLID  ->  docs/solid-analysis.md");
-Console.WriteLine("2. Tách ClubManager thành các class nhỏ, phụ thuộc qua interface (SRP, OCP, DIP)");
-Console.WriteLine("3. Áp dụng Factory, Decorator, Strategy, Observer");
-Console.WriteLine("4. Hoàn thiện Domain và viết unit test AAA (dotnet test)");
-Console.WriteLine("5. Nhánh feature/solid-refactor, Conventional Commits, rebase, Pull Request");
+var clubService = new ClubService(clubRepo, memberRepo, logger, new EmailNotificationService());
+var eventService = new EventService(clubRepo, logger);
+var reportService = new ReportService(clubRepo, memberRepo);
+
+var club = clubService.CreateClub("Tech Club", "Câu lạc bộ công nghệ", "president@gmail.com");
+clubService.AddMember(club.Id, "Nguyễn Văn A", "a@student.dthu.edu.vn");
+eventService.CreateEvent(club.Id, "Workshop SOLID", new DateTime(2026, 11, 20));
+reportService.Generate();

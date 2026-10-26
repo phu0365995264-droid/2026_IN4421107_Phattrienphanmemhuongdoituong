@@ -34,8 +34,18 @@ public class DomainTests
         // Assert
     }
 
-    
+    [Fact(Skip = "TODO: viết test Club.Create với tên rỗng hoặc dài hơn 100 ký tự")]
     public void Club_Create_WithInvalidName_ThrowsArgumentException()
+    {
+        // Arrange
+
+        // Act
+
+        // Assert
+    }
+
+    [Fact(Skip = "TODO: viết test Club.HasRoom ở biên 49 và 50 thành viên")]
+    public void Club_HasRoom_AtMaxMembers_ReturnsFalse()
     {
         // Arrange
             var club = Club.Create("Tech", "mô tả");
@@ -45,17 +55,7 @@ public class DomainTests
             Assert.False(result);
     }
 
-    [Fact(Skip = "TODO: viết test Club.HasRoom ở biên 49 và 50 thành viên")]
-    public void Club_HasRoom_AtMaxMembers_ReturnsFalse()
-    {
-        // Arrange
-
-        // Act
-
-        // Assert
-    }
-
-    [Fact(Skip = "TODO: viết test Event.Register thành viên mới")]
+    [Fact]
     public void Event_Register_NewMember_ReturnsTrue()
     {
         // Arrange
