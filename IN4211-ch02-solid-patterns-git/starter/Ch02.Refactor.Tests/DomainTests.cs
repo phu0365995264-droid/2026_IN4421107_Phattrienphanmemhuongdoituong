@@ -48,13 +48,14 @@ public class DomainTests
     public void Club_HasRoom_AtMaxMembers_ReturnsFalse()
     {
         // Arrange
-
+            var club = Club.Create("Tech", "mô tả");
         // Act
-
+            var result = club.HasRoom(Club.MaxMembers);
         // Assert
+            Assert.False(result);
     }
 
-    [Fact(Skip = "TODO: viết test Event.Register thành viên mới")]
+    [Fact]
     public void Event_Register_NewMember_ReturnsTrue()
     {
         // Arrange
